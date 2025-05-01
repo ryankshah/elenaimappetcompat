@@ -9,6 +9,5 @@
 	],
 	"server": [],
 	"client": [
-		"MinecraftMixin"
 	]
 }
