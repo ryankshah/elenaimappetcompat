@@ -1,5 +1,6 @@
 package com.andrew.andrewservercompat.network;
 
+import com.andrew.andrewservercompat.CustomTeleporter;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
@@ -32,7 +33,7 @@ public class C2STransitCandyDimension implements IMessage {
             EntityPlayerMP serverPlayer = ctx.getServerHandler().player;
             // The value that was sent
             int amount = message.toSend;
-            serverPlayer.changeDimension(amount);
+            serverPlayer.changeDimension(amount, new CustomTeleporter(serverPlayer.getServerWorld()));
             // No response packet
             return null;
         }

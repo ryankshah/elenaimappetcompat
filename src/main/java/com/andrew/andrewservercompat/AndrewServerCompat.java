@@ -41,20 +41,22 @@ public class AndrewServerCompat
     public AndrewServerCompat() {
     }
 
-    @Mod.EventHandler
+    @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         logger = event.getModLog();
         MinecraftForge.EVENT_BUS.register(this);
         Networking.register();
         ModEntities.init();
+        RenderHandler.initModels();
+//        ModEntities.init();
     }
 
-    @Mod.EventHandler
+    @EventHandler
     public void init(FMLInitializationEvent e) {
     }
 
     @EventHandler
-    public void loadComplete(FMLLoadCompleteEvent event) {
+    public static void loadComplete(FMLLoadCompleteEvent event) {
         for(Supplier<EntityEntry> entity : MoreMobss.instance.elements.entities) {
             Biomes.HELL.getSpawnableList(EnumCreatureType.MONSTER).removeIf(
                     entry -> entry.entityClass == EntityGhost.EntityCustom.class);
@@ -131,7 +133,7 @@ public class AndrewServerCompat
 //    }
 
     @SubscribeEvent
-    public void playerDeath(PlayerEvent.PlayerRespawnEvent event) {
+    public static void playerDeath(PlayerEvent.PlayerRespawnEvent event) {
         if(!event.isEndConquered()) {
 //            event.player.getServer().
             Networking.INSTANCE.sendToServer(new C2STransitCandyDimension(ModConfig.dimensionId));
