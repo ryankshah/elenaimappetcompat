@@ -1,0 +1,15 @@
+{
+  "package": "com.andrew.andrewservercompat.mixin",
+  "required": true,
+  "target": "@env(DEFAULT)",
+  "refmap": "mixins.andrewservercompat.refmap.json",
+  "minVersion": "0.8.5",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+    "MixinEntityGhost",
+    "MixinEntityShroomling",
+    "MixinEntityShroomling2"
+  ],
+  "server": [],
+  "client": []
+}
