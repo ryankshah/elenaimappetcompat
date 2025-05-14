@@ -9,8 +9,12 @@ import net.mcreator.moremobss.entity.EntityGhoul;
 import net.mcreator.moremobss.entity.EntityStoneGolem;
 import net.mcreator.moremobss.entity.EntityTroll;
 import net.minecraft.entity.EnumCreatureType;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Biomes;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -42,17 +46,15 @@ public class AndrewServerCompat
     }
 
     @EventHandler
-    public void preInit(FMLPreInitializationEvent event) {
+    public static void preInit(FMLPreInitializationEvent event) {
         logger = event.getModLog();
-        MinecraftForge.EVENT_BUS.register(this);
         Networking.register();
-        ModEntities.init();
-        RenderHandler.initModels();
 //        ModEntities.init();
+        RenderHandler.initModels();
     }
 
     @EventHandler
-    public void init(FMLInitializationEvent e) {
+    public static void init(FMLInitializationEvent e) {
     }
 
     @EventHandler
@@ -132,11 +134,11 @@ public class AndrewServerCompat
 //        }
 //    }
 
-    @SubscribeEvent
-    public static void playerDeath(PlayerEvent.PlayerRespawnEvent event) {
-        if(!event.isEndConquered()) {
-//            event.player.getServer().
-            Networking.INSTANCE.sendToServer(new C2STransitCandyDimension(ModConfig.dimensionId));
-        }
-    }
+//    @SubscribeEvent
+//    public static void playerDeath(PlayerEvent.PlayerRespawnEvent event) {
+//        if(!event.isEndConquered()) {
+////            event.player.getServer().
+//            Networking.INSTANCE.sendToServer(new C2STransitCandyDimension(ModConfig.dimensionId));
+//        }
+//    }
 }
